@@ -11,6 +11,7 @@ Use **/display** or the shortcut **/edp** for every command below.
 
 ## Table of contents
 
+- [Using the graphical menu (GUI)](#using-the-graphical-menu-gui)
 - [Spawning displays](#spawning-displays)
 - [Selecting displays to edit](#selecting-displays-to-edit)
 - [Undo](#undo)
@@ -19,12 +20,33 @@ Use **/display** or the shortcut **/edp** for every command below.
 - [Appearance: billboard, view range, shadow, brightness](#appearance-billboard-view-range-shadow-brightness)
 - [Glow](#glow)
 - [Text displays](#text-displays)
-- [Graphical menu (GUI)](#graphical-menu-gui)
 - [Compositions (saving layouts)](#compositions-saving-layouts)
 - [Permissions](#permissions)
 - [Region protection (WorldGuard)](#region-protection-worldguard)
 - [Resource pack: see-through GUI panel](#resource-pack-see-through-gui-panel)
 - [Troubleshooting](#troubleshooting)
+
+## Using the graphical menu (GUI)
+
+Most of what's described below is also available as a click-based inventory menu — handy if you
+don't want to remember commands. Open it with `/display gui <menu>`, starting from the main menu:
+
+```
+/display gui display_basics
+```
+
+From there, buttons in the top row jump between sub-menus, and every sub-menu has a "back" button
+to return to Basics. Each section below shows the matching GUI menu right next to the commands it
+covers, plus a note on where the GUI and the commands differ — the GUI is quick and
+preset-based (fixed step sizes, predefined colors, ...), while the commands accept any exact
+value and cover a few things the GUI doesn't have a button for at all (e.g. `/display duplicate`,
+`/display undo`, setting a Text Display's actual text, or custom RGB/HEX colors).
+
+> **Note:** the menu buttons are currently labelled in German regardless of your `config.yml`
+> language setting — the chat messages the plugin sends you still follow that setting normally.
+
+The see-through chest background in the screenshots comes from an optional resource pack — see
+[Resource pack: see-through GUI panel](#resource-pack-see-through-gui-panel).
 
 ## Spawning displays
 
@@ -44,6 +66,9 @@ Spawns a display positioned at your feet, your head, or in front of you.
 Once spawned, the display is automatically selected and ready to edit — there is no separate
 "select" step after spawning.
 
+*GUI:* the `display_basics` menu has one button per spawn location (feet/front/head), always
+using the item in your hand — same as the command.
+
 ## Selecting displays to edit
 
 DisplayChanger keeps you "logged in" to one display at a time. Whatever you spawn, register, or
@@ -58,6 +83,12 @@ switch to becomes the active display for every editing command below.
   etc.) about the currently selected display.
 - **`/display unregister`** — clears your registered displays and leaves edit mode.
 
+*GUI:* the `display_basics` menu has matching buttons for all of the above (register, switch
+previous/next, info for all displays, info for the selected one, and unregister) — full parity
+with the commands, no finer control either way.
+
+![Display - Basics menu](gui-screenshots/display-basics.png)
+
 ## Undo
 
 **`/display undo`**
@@ -70,11 +101,16 @@ The undo history is cleared when you switch to another display, run `/display un
 disconnect — undo only ever applies to the display you are currently editing, and only for the
 current session.
 
+*GUI:* there is no undo button anywhere in the menu — undo is command-only.
+
 ## Duplicating and deleting
 
 - **`/display duplicate`** — spawns a full copy of the currently selected display (same look,
   transform, glow, shadow, etc.) in front of you and selects the copy.
 - **`/display delete`** — permanently removes the currently selected display.
+
+*GUI:* `display_basics` has a delete button (see screenshot above), but no duplicate button —
+duplicating a display is command-only.
 
 ## Transform: move, scale, rotate
 
@@ -86,17 +122,37 @@ current session.
 Prefix the value with `~` for a relative move (e.g. `~1` moves 1 block further); without `~` the
 value is an absolute coordinate.
 
+*GUI:* the `display_movement` menu nudges the display west/east, north/south and up/down in fixed
+steps of 0.001, 0.01, 0.1 or 1 blocks per click. It's great for quick, precise nudging, but the
+command is more flexible: it accepts *any* step size, lets you type an exact absolute coordinate
+instead of a relative nudge, and can move all three axes in a single call.
+
+![Display - Movement menu](gui-screenshots/display-movement.png)
+
 **Scale**
 
 `/display scale <set|add> <x|y|z|all> <value>` sets or adds to the scale on the given axis (or
 all axes at once).
 `/display scale reset` resets the scale back to the values the display was spawned with.
 
+*GUI:* the `display_scale` menu grows/shrinks width, height and depth independently (or
+uniformly) in fixed steps of 0.1 or 1, plus a reset button. It only ever *adds to* the current
+scale — jumping straight to an exact scale value (`set`) is command-only.
+
+![Display - Scale menu](gui-screenshots/display-scale.png)
+
 **Rotation**
 
 `/display rotation <set|add> <pitch|roll|yaw|all> <value>` sets or adds to the rotation on the
 given axis.
 `/display rotation reset` resets the rotation back to the values the display was spawned with.
+
+*GUI:* the `display_rotation` menu tilts/turns the display in fixed steps of 1° or 10° per click
+(pitch, yaw and roll each have their own buttons), plus a reset button. As with scale, it only
+adds to the current rotation — setting an exact angle, or setting all three axes at once, is
+command-only.
+
+![Display - Rotation menu](gui-screenshots/display-rotation.png)
 
 ## Appearance: billboard, view range, shadow, brightness
 
@@ -123,11 +179,23 @@ wins).
 `/display shadowstrength <value>` sets the strength/darkness of the shadow.
 A shadow is only visible once **both** values are greater than 0.
 
+*GUI:* the `display_settings` menu covers all three of the above in one place — billboard has all
+four modes as buttons (full parity with the command), while view range (25/50/75/100%) and shadow
+radius/strength (preset buttons) only offer a handful of fixed values plus a reset. Any other
+percentage or shadow value needs the command.
+
+![Display - View Settings menu](gui-screenshots/display-settings.png)
+
 **Brightness**
 
 `/display brightness <value>` sets the display's brightness, from `0` (fully dark) to `15` (fully
 lit, ignores the surrounding light level).
 `/display brightness reset` resets it back to the brightness the display was spawned with.
+
+*GUI:* the `display_brightness` menu has one button per brightness level (0–15) plus reset — since
+brightness only ever has 16 possible values in Minecraft, the GUI already covers the full range.
+
+![Display - Brightness menu](gui-screenshots/display-brightness.png)
 
 ## Glow
 
@@ -143,6 +211,11 @@ lit, ignores the surrounding light level).
 
 Glow and glow color are **not available for Text Displays** — text displays don't have an outline
 to glow.
+
+*GUI:* the `display_glowcolors` menu toggles glow on/off and offers all 16 predefined dye colors
+plus reset — custom RGB or HEX colors are command-only.
+
+![Display - Glowcolor menu](gui-screenshots/display-glowcolors.png)
 
 ## Text displays
 
@@ -166,105 +239,37 @@ displays](#spawning-displays) — hold a Name Tag to spawn one).
   the text wraps.
 - **`/display text seethrough <true|false>`** — makes the text visible through walls (`true`) or
   only when in line of sight (`false`).
-- **`/display text opacity <0-100>`** — sets how opaque the text is, as a percentage.
-- **`/display text backgroundcolor <colorname|rgb <r> <g> <b>|hex <#RRGGBB>|reset>`** — sets the
-  background panel color behind the text, the same color options as
-  [glow color](#glow) above.
 
-## Graphical menu (GUI)
-
-Everything above is also available as a click-based inventory menu, useful if you don't want to
-remember commands, or want to make small nudges to a display's position/scale/rotation.
-
-Open it with **`/display gui <menu>`**. The main menu to start from is `display_basics`:
-
-```
-/display gui display_basics
-```
-
-From there, buttons in the top row let you jump between the sub-menus, and each sub-menu has a
-"back" button to return to Basics.
-
-> **Note:** the menu buttons are currently labelled in German regardless of your `config.yml`
-> language setting — the chat messages the plugin sends you still follow that setting normally.
-
-The see-through chest background in the screenshots below comes from the optional resource pack —
-see [Resource pack: see-through GUI panel](#resource-pack-see-through-gui-panel).
-
-### `display_basics`
-
-`/display gui display_basics` — the main menu: spawn a display at your feet/front/head, register
-displays nearby, switch between them, get info, delete the selected display, and jump to every
-other menu below.
-
-![Display - Basics menu](gui-screenshots/display-basics.png)
-
-### `display_movement`
-
-`/display gui display_movement` — nudge the selected display along all 6 directions, in steps of
-1, 0.1, or 0.01 blocks.
-
-![Display - Movement menu](gui-screenshots/display-movement.png)
-
-### `display_rotation`
-
-`/display gui display_rotation` — tilt and rotate the selected display in 1° or 10° steps, or
-reset its rotation.
-
-![Display - Rotation menu](gui-screenshots/display-rotation.png)
-
-### `display_scale`
-
-`/display gui display_scale` — grow or shrink the selected display's width, height and depth
-independently (in 0.1 or 1 steps), or scale it uniformly, or reset it.
-
-![Display - Scale menu](gui-screenshots/display-scale.png)
-
-### `display_settings`
-
-`/display gui display_settings` — shadow radius and strength, view range, and billboard
-alignment.
-
-![Display - View Settings menu](gui-screenshots/display-settings.png)
-
-### `display_brightness`
-
-`/display gui display_brightness` — set the brightness directly (0–15), or reset it.
-
-![Display - Brightness menu](gui-screenshots/display-brightness.png)
-
-### `display_glowcolors`
-
-`/display gui display_glowcolors` — turn glow on/off and pick a glow color. Only has an effect on
-Item and Block Displays, not Text Displays.
-
-![Display - Glowcolor menu](gui-screenshots/display-glowcolors.png)
-
-### `display_text`
-
-`/display gui display_text` — Text-Display-only settings: line width, see-through, text
-alignment, and links into the two menus below. Only usable while a Text Display is selected.
+*GUI:* the `display_text` menu covers line width (±5/±10 steps only — no exact `set`), see-through
+(full parity) and alignment (full parity). **There is no button to actually set or add the text
+itself** — `settext`/`addtext` are command-only.
 
 ![Display - Text-Displays menu](gui-screenshots/display-text.png)
 
-### `display_text_backgroundcolors`
+**Opacity**
 
-`/display gui display_text_backgroundcolors` — pick the Text Display's background color, or
-reset/clear it.
+`/display text opacity <0-100>` sets how opaque the text is, as a percentage.
 
-![Display - Backgroundcolor menu](gui-screenshots/display-text-backgroundcolors.png)
-
-### `display_text_opacity`
-
-`/display gui display_text_opacity` — set the Text Display's opacity in 10% steps.
+*GUI:* the `display_text_opacity` menu offers fixed 10% steps (0/10/20/…/100). Any other exact
+percentage needs the command.
 
 ![Display - Opacity menu](gui-screenshots/display-text-opacity.png)
+
+**Background color**
+
+`/display text backgroundcolor <colorname|rgb <r> <g> <b>|hex <#RRGGBB>|reset>` sets the
+background panel color behind the text, the same color options as [glow color](#glow) above.
+
+*GUI:* the `display_text_backgroundcolors` menu offers the same 16 predefined colors plus reset —
+just like glow color, custom RGB/HEX is command-only.
+
+![Display - Backgroundcolor menu](gui-screenshots/display-text-backgroundcolors.png)
 
 ## Compositions (saving layouts)
 
 Compositions let you save a group of displays as a named, reusable layout — like a WorldEdit
 schematic, but scoped to display entities. Requires the [WorldEdit](https://enginehub.org/worldedit)
-plugin.
+plugin. There is no GUI menu for compositions — everything below is command-only.
 
 1. Select the area with WorldEdit (`//pos1`, `//pos2`) around the displays you want to save.
 2. Run **`/display composition save <name>`**. Every display inside that selection is captured —
@@ -307,8 +312,8 @@ Without WorldGuard, only the permissions above apply.
 
 ## Resource pack: see-through GUI panel
 
-The [Graphical menu](#graphical-menu-gui) opens as a large chest-style inventory, which can
-partially block your view of the display you're editing. This repository includes an optional
+The [graphical menu](#using-the-graphical-menu-gui) opens as a large chest-style inventory, which
+can partially block your view of the display you're editing. This repository includes an optional
 resource pack that makes that chest texture transparent, so you can see the display behind the
 menu while you edit it:
 
