@@ -4,7 +4,7 @@ DisplayChanger is a Paper server plugin that lets you spawn, edit and save **Dis
 (Item Displays, Block Displays and Text Displays) without any external editor — everything is
 done in-game, either with chat commands or with a graphical menu.
 
-Use **/display** or the shortcut **/edp** for every command below.
+Use **/display** for every command below.
 
 > Need permission to use any of this? Ask your server admin — see [Permissions](#permissions) for
 > the full list of permission nodes.
