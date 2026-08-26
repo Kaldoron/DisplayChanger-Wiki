@@ -19,6 +19,12 @@ You get a list of all registered displays with **/display infoall**
 
 After editing the edit mode can be left using **/display unregister**.
 
+### Undo display changes
+
+With **/display undo** you can undo the last change made to the currently selected display, one step at a time.
+
+Every successful edit (scale, rotation, move, brightness, viewrange, shadow, billboard, glow, glowcolor and text changes) is remembered while you are editing a display. Switching to another display, leaving edit mode with **/display unregister**, or disconnecting clears this history — undo only applies to the display you are currently editing.
+
 ### Delete display
 
 With **/display delete** you can delete the currently selected display.
