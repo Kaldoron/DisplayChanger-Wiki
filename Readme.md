@@ -1,5 +1,7 @@
 # DisplayChanger
 
+🇬🇧 **English** | 🇩🇪 [Deutsch](Readme.de.md)
+
 DisplayChanger is a Paper server plugin that lets you spawn, edit and save **Display Entities**
 (Item Displays, Block Displays and Text Displays) without any external editor — everything is
 done in-game, either with chat commands or with a graphical menu.

@@ -1,5 +1,7 @@
 # Changelog
 
+🇬🇧 **English** | 🇩🇪 [Deutsch](Changelog.de.md)
+
 User-facing changes to DisplayChanger, newest first. The plugin doesn't use version numbers for
 releases, so entries are grouped by date instead.
 
