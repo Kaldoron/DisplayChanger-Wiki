@@ -28,6 +28,7 @@ Nutze **/display** für jeden Befehl unten.
 - [Resource Pack: durchsichtiges GUI-Panel](#resource-pack-durchsichtiges-gui-panel)
 - [Fehlerbehebung](#fehlerbehebung)
 - [Changelog](Changelog.de.md)
+- [Beispiele - Kreationen von Usern](Examples.de.md)
 
 ## Das grafische Menü (GUI) nutzen
 
