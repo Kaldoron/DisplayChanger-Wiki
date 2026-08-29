@@ -28,6 +28,7 @@ Use **/display** for every command below.
 - [Resource pack: see-through GUI panel](#resource-pack-see-through-gui-panel)
 - [Troubleshooting](#troubleshooting)
 - [Changelog](Changelog.md)
+- [Examples - Userart](Examples.md)
 
 ## Using the graphical menu (GUI)
 
