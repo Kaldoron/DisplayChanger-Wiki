@@ -18,12 +18,12 @@ Anbei ein paar Beispiele für Krationen, die mit dem DisplayChanger erstellt wur
 
 ## Kreationen erstellt von Stilora und Taeddys
 
-![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTeaddys1.png)
-![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTeaddys2.png)
-![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTeaddys3.png)
-![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTeaddys5.png)
-![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTeaddys6.png)
-![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTeaddys7.png)
-![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTeaddys8.png)
-![Displays - erstellt von Taeddys](userart-screenshots/Teaddys1.png)
+![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTaeddys1.png)
+![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTaeddys2.png)
+![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTaeddys3.png)
+![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTaeddys5.png)
+![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTaeddys6.png)
+![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTaeddys7.png)
+![Displays - erstellt von Stilora und Taeddys](userart-screenshots/StiloraAndTaeddys8.png)
+![Displays - erstellt von Taeddys](userart-screenshots/Taeddys1.png)
 ![Displays - erstellt von Stilora](userart-screenshots/Stilora1.png)
