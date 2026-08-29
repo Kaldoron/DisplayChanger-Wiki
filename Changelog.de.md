@@ -7,6 +7,13 @@ Versionsnummern für Releases, daher sind die Einträge nach Datum gruppiert.
 
 ## 2026-08-24 – 2026-08-26
 
+**Transparenz bei der Hintergrundfarbe**
+`/display text backgroundcolor` akzeptiert jetzt einen optionalen Alpha-Wert (`0`–`255`) nach
+einem Colorname oder einer RGB-Farbe, und bei HEX als zwei zusätzliche Hex-Stellen
+(`#RRGGBBAA`) – `0` macht den Hintergrund vollständig unsichtbar. `reset` stellt weiterhin nur
+Minecrafts durchscheinenden Standardhintergrund wieder her und blendet ihn nicht aus; für echte
+Unsichtbarkeit Alpha `0` verwenden. Siehe [Text-Displays](Readme.de.md#text-displays).
+
 **Compositions auf WorldEdit-Basis neu gebaut**
 Compositions (gespeicherte Display-Layouts) waren eine Zeit lang deaktiviert und wurden jetzt
 komplett neu gebaut:

@@ -7,6 +7,12 @@ releases, so entries are grouped by date instead.
 
 ## 2026-08-24 – 2026-08-26
 
+**Background color transparency**
+`/display text backgroundcolor` now takes an optional alpha value (`0`–`255`) after a colorname or
+RGB color, and as two extra hex digits (`#RRGGBBAA`) for HEX — `0` makes the background fully
+invisible. Note that `reset` still restores Minecraft's default translucent background rather than
+hiding it; use alpha `0` for true invisibility. See [Text displays](Readme.md#text-displays).
+
 **Compositions rebuilt on WorldEdit**
 Compositions (saved display layouts) had been disabled for a while and are now fully rebuilt:
 

@@ -260,11 +260,17 @@ percentage needs the command.
 
 **Background color**
 
-`/display text backgroundcolor <colorname|rgb <r> <g> <b>|hex <#RRGGBB>|reset>` sets the
-background panel color behind the text, the same color options as [glow color](#glow) above.
+`/display text backgroundcolor <colorname [alpha]|rgb <r> <g> <b> [alpha]|hex <#RRGGBB[AA]>|reset>`
+sets the background panel color behind the text. Colorname, RGB and HEX all accept an optional
+alpha value from `0` (fully invisible) to `255` (fully opaque, the default) — for HEX it's two
+extra digits on the end (`#RRGGBBAA`) instead of a separate argument.
+
+`reset` restores Minecraft's built-in translucent background — it does **not** make the background
+invisible. To hide the background entirely, set alpha to `0` instead, e.g.
+`/display text backgroundcolor black 0` or `/display text backgroundcolor hex #00000000`.
 
 *GUI:* the `display_text_backgroundcolors` menu offers the same 16 predefined colors plus reset —
-just like glow color, custom RGB/HEX is command-only.
+custom RGB/HEX and alpha are command-only.
 
 ![Display - Backgroundcolor menu](gui-screenshots/display-text-backgroundcolors.png)
 

@@ -274,12 +274,18 @@ exakte Prozentwert braucht den Befehl.
 
 **Hintergrundfarbe**
 
-`/display text backgroundcolor <colorname|rgb <r> <g> <b>|hex <#RRGGBB>|reset>` setzt die Farbe
-des Hintergrund-Panels hinter dem Text – die gleichen Farboptionen wie bei der
-[Leuchtfarbe](#leuchten-glow) oben.
+`/display text backgroundcolor <colorname [alpha]|rgb <r> <g> <b> [alpha]|hex <#RRGGBB[AA]>|reset>`
+setzt die Farbe des Hintergrund-Panels hinter dem Text. Colorname, RGB und HEX akzeptieren alle
+einen optionalen Alpha-Wert von `0` (vollständig unsichtbar) bis `255` (voll deckend, Standard) –
+bei HEX sind das zwei zusätzliche Stellen am Ende (`#RRGGBBAA`) statt eines eigenen Arguments.
+
+`reset` stellt Minecrafts eingebauten durchscheinenden Hintergrund wieder her – das macht den
+Hintergrund **nicht** unsichtbar. Um den Hintergrund vollständig auszublenden, setze stattdessen
+Alpha auf `0`, z. B. `/display text backgroundcolor black 0` oder
+`/display text backgroundcolor hex #00000000`.
 
 *GUI:* Das Menü `display_text_backgroundcolors` bietet dieselben 16 vordefinierten Farben plus
-Reset – wie bei der Leuchtfarbe gibt es eigene RGB-/HEX-Farben nur per Befehl.
+Reset – eigene RGB-/HEX-Farben und Alpha gibt es nur per Befehl.
 
 ![Display - Backgroundcolor menu](gui-screenshots/display-text-backgroundcolors.png)
 
