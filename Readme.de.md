@@ -23,6 +23,7 @@ Nutze **/display** für jeden Befehl unten.
 - [Leuchten (Glow)](#leuchten-glow)
 - [Text-Displays](#text-displays)
 - [Compositions (Layouts speichern)](#compositions-layouts-speichern)
+- [Eine Gruppe von Displays bewegen und rotieren](#eine-gruppe-von-displays-bewegen-und-rotieren)
 - [Berechtigungen](#berechtigungen)
 - [Regionsschutz (WorldGuard)](#regionsschutz-worldguard)
 - [Resource Pack: durchsichtiges GUI-Panel](#resource-pack-durchsichtiges-gui-panel)
@@ -57,7 +58,7 @@ Der durchsichtige Kisten-Hintergrund in den Screenshots stammt von einem optiona
 
 ## Displays spawnen
 
-**`/display spawn <feet|front|head> [material]`**
+**`/display spawn <feet|front|head> [material] [item|block]`**
 
 Spawnt ein Display an deinen Füßen, an deinem Kopf oder vor dir.
 
@@ -70,6 +71,11 @@ Spawnt ein Display an deinen Füßen, an deinem Kopf oder vor dir.
   - Ein **Namensschild** → ein **Text-Display**. Hat das Namensschild einen benutzerdefinierten
     Namen (am Amboss umbenannt), wird dieser Name zum Text des Displays; sonst wird ein
     Platzhaltertext verwendet.
+- Bei einem explizit angegebenen Material, das beide Formen unterstützt (jedes Block-Item), kannst
+  du am Ende `item` oder `block` anhängen, um zu erzwingen, welche Form du bekommst – z. B. spawnt
+  `/display spawn front stone item` das flache Item-Icon von Stein statt eines 3D-Blocks. Eine
+  Kombination zu erzwingen, die das Material nicht unterstützt (z. B. `block` bei einem
+  Nicht-Block-Item), gibt einen Fehler statt etwas zu spawnen.
 
 Nach dem Spawnen ist das Display automatisch ausgewählt und bereit zur Bearbeitung – ein separater
 "Auswahl"-Schritt danach ist nicht nötig.
@@ -116,7 +122,8 @@ bearbeitest, und nur für die aktuelle Sitzung.
 ## Duplizieren und Löschen
 
 - **`/display duplicate`** – spawnt eine vollständige Kopie des aktuell ausgewählten Displays
-  (gleiches Aussehen, Transformation, Leuchten, Schatten usw.) vor dir und wählt die Kopie aus.
+  (gleiches Aussehen, Transformation, Leuchten, Schatten usw.) vor dir, fügt sie zu deinen
+  registrierten Displays hinzu und wählt die Kopie aus.
 - **`/display delete`** – entfernt das aktuell ausgewählte Display dauerhaft.
 
 *GUI:* `display_basics` hat einen Löschen-Button (siehe Screenshot oben), aber keinen
@@ -158,6 +165,7 @@ nur per Befehl.
 
 `/display rotation <set|add> <pitch|roll|yaw|all> <value>` setzt die Rotation auf der angegebenen
 Achse oder addiert dazu.
+`/display rotation <set|add> <x> <y> <z>` setzt Yaw, Pitch und Roll auf einmal oder addiert dazu.
 `/display rotation reset` setzt die Rotation zurück auf die Werte, mit denen das Display gespawnt
 wurde.
 
@@ -319,16 +327,53 @@ Hinweise:
   [Regionsschutz](#regionsschutz-worldguard)) und ein installiertes WorldEdit; Laden, Auflisten und
   Löschen einer Composition benötigen kein WorldEdit.
 
+## Eine Gruppe von Displays bewegen und rotieren
+
+Zusätzlich zum Bearbeiten einzelner Displays kannst du jedes Display innerhalb einer
+WorldEdit-Selektion als feste Gruppe registrieren und alle gemeinsam als ein starres Objekt bewegen
+oder rotieren. Benötigt das [WorldEdit](https://enginehub.org/worldedit)-Plugin. Dafür gibt es kein
+GUI-Menü – alles unten ist nur per Befehl verfügbar.
+
+1. Wähle mit WorldEdit den Bereich um die Displays aus, die du als Gruppe bewegen oder rotieren
+   willst (`//pos1`, `//pos2`).
+2. Führe **`/display selection register`** aus. Jedes Display innerhalb dieser Selektion wird Teil
+   der Gruppe; die Mitte der Selektion wird als Pivotpunkt der Gruppe gespeichert.
+3. **`/display selection move <dx> <dy> <dz>`** – bewegt jedes Display der Gruppe um den
+   angegebenen Versatz (relativ, in Blöcken).
+4. **`/display selection rotate <yaw|pitch|roll|all> <degrees>`** – rotiert jedes Display der
+   Gruppe gemeinsam um den bei der Registrierung gespeicherten Pivotpunkt; der Pivot bewegt sich
+   mit der Gruppe mit.
+
+Weitere Selection-Befehle:
+
+- **`/display selection unregister`** – hebt die aktuelle Gruppenregistrierung auf.
+
+Hinweise:
+
+- `/display undo` macht auch eine Gruppen-Bewegung/-Rotation rückgängig, genau wie eine
+  Einzeländerung – es wählt automatisch, was zuletzt passiert ist, eine Einzeländerung oder eine
+  Gruppenaktion.
+- Es gelten zwei Server-Grenzen, beide vom Admin in `config.yml` konfigurierbar: Eine Selektion
+  kann höchstens eine festgelegte Anzahl Displays auf einmal betreffen (Standard 300), und eine
+  einzelne Bewegung ist auf eine festgelegte Distanz pro Achse begrenzt (Standard 64 Blöcke).
+- Zum Registrieren einer Gruppe brauchst du Baurechte über den gesamten ausgewählten Bereich; zum
+  Bewegen brauchst du Baurechte sowohl an der aktuellen als auch an der Zielposition, und zum
+  Rotieren Baurechte über den Bereich, den die Gruppe dabei überstreicht (siehe
+  [Regionsschutz](#regionsschutz-worldguard)).
+
 ## Berechtigungen
 
 Frag deinen Server-Admin danach, wenn ein Befehl bei dir nicht funktioniert:
 
-| Berechtigung                       | Gewährt Zugriff auf                                    |
-| ---------------------------------- | ---------------------------------------------------- |
-| `displaychanger.default`          | Den Befehl `/display` und alle Unterbefehle, inklusive der GUI. |
-| `displaychanger.composition.save` | `/display composition save` und `/display composition delete`. |
-| `displaychanger.composition.load` | `/display composition load` und `/display composition list`. |
-| `displaychanger.reload`           | `/display reload` (nur Admin: lädt `config.yml` neu). |
+| Berechtigung                         | Gewährt Zugriff auf                                    |
+| ------------------------------------- | ---------------------------------------------------- |
+| `displaychanger.default`             | Den Befehl `/display` und alle Unterbefehle, inklusive der GUI. |
+| `displaychanger.composition.save`    | `/display composition save` und `/display composition delete`. |
+| `displaychanger.composition.load`    | `/display composition load` und `/display composition list`. |
+| `displaychanger.selection.register`  | `/display selection register` und `/display selection unregister`. |
+| `displaychanger.selection.move`      | `/display selection move`. |
+| `displaychanger.selection.rotate`    | `/display selection rotate`. |
+| `displaychanger.reload`              | `/display reload` (nur Admin: lädt `config.yml` neu). |
 
 ## Regionsschutz (WorldGuard)
 
@@ -359,9 +404,13 @@ Server zuschicken), um es zu nutzen.
 | *Display is too far away*                           | Geh näher an das Display heran, das du bearbeitest.                   |
 | *Invalid material*                                  | Das Item/Material, mit dem du spawnen wolltest, ist ungültig oder steht auf der Sperrliste des Servers. |
 | *This command can only be applied to text displays* | Du hast einen `text`/`glow`-Befehl bei einem nicht passenden Display-Typ ausgeführt. |
-| *No WorldEdit selection found*                      | Führe `//pos1` und `//pos2` aus, bevor du eine Composition speicherst. |
+| *No WorldEdit selection found*                      | Führe `//pos1` und `//pos2` aus, bevor du eine Composition speicherst oder eine Selection-Gruppe registrierst. |
 | *This feature requires WorldEdit*                   | WorldEdit ist auf diesem Server nicht installiert.                    |
 | *Invalid composition name*                          | Nur Kleinbuchstaben, Zahlen, `-` und `_` sind erlaubt (max. 32 Zeichen). |
+| *No selection group registered*                     | Führe `/display selection register` vor `move`/`unregister` aus.      |
+| *Too many displays in the selection*                | Verkleinere deine WorldEdit-Selektion – sie überschreitet das konfigurierte Server-Limit. |
+| *The move distance exceeds the configured limit*     | Teile die Bewegung in kleinere Schritte auf, oder bitte einen Admin, `selection_move_radius` zu erhöhen. |
+| *Cannot spawn ... as a ... display*                 | Das gespawnte Material unterstützt den erzwungenen `item`/`block`-Typ nicht. |
 
 **Warum kann ich hier nicht bauen?** – Prüfe deine WorldGuard-Regionrechte oder frag einen OP.
 

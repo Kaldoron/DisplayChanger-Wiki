@@ -5,6 +5,34 @@
 User-facing changes to DisplayChanger, newest first. The plugin doesn't use version numbers for
 releases, so entries are grouped by date instead.
 
+## 2026-08-31
+
+**Move and rotate a group of displays together**
+New `/display selection` commands let you treat every display inside a WorldEdit selection as one
+rigid group:
+
+- `/display selection register` — registers every display inside your current WorldEdit selection
+  (`//pos1`/`//pos2`) as a group, capturing the selection's center as a fixed pivot point.
+- `/display selection move <dx> <dy> <dz>` — moves the whole group by a relative offset.
+- `/display selection rotate <yaw|pitch|roll|all> <degrees>` — rotates the whole group together
+  around its pivot.
+- `/display selection unregister` — clears the group registration.
+
+`/display undo` now also undoes the most recent group move/rotate, alongside single-display edits
+— whichever happened most recently. See [Moving and rotating a group of
+displays](Readme.md#moving-and-rotating-a-group-of-displays).
+
+**Force item or block display when spawning**
+`/display spawn <feet|front|head> <material> <item|block>` lets you force a material that supports
+both — like a block — to spawn as an Item Display (its flat icon) instead of the usual Block
+Display, or vice versa. See [Spawning displays](Readme.md#spawning-displays).
+
+**Fixed**
+- `/display duplicate` used to replace your entire list of registered displays with just the new
+  copy, so switching back to displays you'd registered before duplicating meant registering them
+  again. The copy is now added to that list instead, leaving the rest of your registered displays
+  intact.
+
 ## 2026-08-24 – 2026-08-26
 
 **Background color transparency**

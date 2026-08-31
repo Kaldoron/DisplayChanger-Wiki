@@ -23,6 +23,7 @@ Use **/display** for every command below.
 - [Glow](#glow)
 - [Text displays](#text-displays)
 - [Compositions (saving layouts)](#compositions-saving-layouts)
+- [Moving and rotating a group of displays](#moving-and-rotating-a-group-of-displays)
 - [Permissions](#permissions)
 - [Region protection (WorldGuard)](#region-protection-worldguard)
 - [Resource pack: see-through GUI panel](#resource-pack-see-through-gui-panel)
@@ -54,7 +55,7 @@ The see-through chest background in the screenshots comes from an optional resou
 
 ## Spawning displays
 
-**`/display spawn <feet|front|head> [material]`**
+**`/display spawn <feet|front|head> [material] [item|block]`**
 
 Spawns a display positioned at your feet, your head, or in front of you.
 
@@ -66,6 +67,10 @@ Spawns a display positioned at your feet, your head, or in front of you.
   - A **Player Head** with a texture → an **Item Display** showing that exact skin.
   - A **Name Tag** → a **Text Display**. If the name tag has a custom name set (renamed on an
     anvil), that name becomes the display's text; otherwise a placeholder text is used.
+- For a material that's given explicitly and supports both forms (any block item), add `item` or
+  `block` at the end to force which one you get — e.g. `/display spawn front stone item` spawns
+  stone's flat item icon instead of a 3D block. Forcing a combination the material doesn't support
+  (e.g. `block` on a non-block item) gives an error instead of spawning anything.
 
 Once spawned, the display is automatically selected and ready to edit — there is no separate
 "select" step after spawning.
@@ -110,7 +115,8 @@ current session.
 ## Duplicating and deleting
 
 - **`/display duplicate`** — spawns a full copy of the currently selected display (same look,
-  transform, glow, shadow, etc.) in front of you and selects the copy.
+  transform, glow, shadow, etc.) in front of you, adds it to your registered displays, and selects
+  the copy.
 - **`/display delete`** — permanently removes the currently selected display.
 
 *GUI:* `display_basics` has a delete button (see screenshot above), but no duplicate button —
@@ -149,6 +155,7 @@ scale — jumping straight to an exact scale value (`set`) is command-only.
 
 `/display rotation <set|add> <pitch|roll|yaw|all> <value>` sets or adds to the rotation on the
 given axis.
+`/display rotation <set|add> <x> <y> <z>` sets or adds to yaw, pitch and roll all at once.
 `/display rotation reset` resets the rotation back to the values the display was spawned with.
 
 *GUI:* the `display_rotation` menu tilts/turns the display in fixed steps of 1° or 10° per click
@@ -302,16 +309,50 @@ Notes:
   [Region protection](#region-protection-worldguard)) and requires WorldEdit to be installed;
   loading, listing, and deleting a composition do not require WorldEdit.
 
+## Moving and rotating a group of displays
+
+Beyond editing one display at a time, you can register every display inside a WorldEdit selection
+as a fixed group and move or rotate all of them together as a single rigid body. Requires the
+[WorldEdit](https://enginehub.org/worldedit) plugin. There is no GUI menu for this — everything
+below is command-only.
+
+1. Select the area with WorldEdit (`//pos1`, `//pos2`) around the displays you want to move or
+   rotate as a group.
+2. Run **`/display selection register`**. Every display inside that selection becomes the group;
+   the center of the selection is captured as the group's pivot point.
+3. **`/display selection move <dx> <dy> <dz>`** — moves every display in the group by the given
+   offset (relative, in blocks).
+4. **`/display selection rotate <yaw|pitch|roll|all> <degrees>`** — rotates every display in the
+   group together around the pivot captured at registration; the pivot moves with the group.
+
+Other selection commands:
+
+- **`/display selection unregister`** — clears the current group registration.
+
+Notes:
+
+- `/display undo` also undoes a group move/rotate, same as it undoes a single-display edit — it
+  automatically picks whichever, a single edit or a group action, happened most recently.
+- Two server limits apply, both configurable by the admin in `config.yml`: a selection can affect
+  at most a set number of displays at once (300 by default), and a single move is capped at a set
+  distance per axis (64 blocks by default).
+- Registering a group requires build rights across the whole selected area; moving requires build
+  rights at both the current and destination positions, and rotating requires build rights across
+  the area the group sweeps through (see [Region protection](#region-protection-worldguard)).
+
 ## Permissions
 
 Ask your server admin for these if a command doesn't work for you:
 
-| Permission                        | Grants access to                                    |
-| ---------------------------------- | ---------------------------------------------------- |
-| `displaychanger.default`          | The `/display` command and all of its subcommands, including the GUI. |
-| `displaychanger.composition.save` | `/display composition save` and `/display composition delete`. |
-| `displaychanger.composition.load` | `/display composition load` and `/display composition list`. |
-| `displaychanger.reload`           | `/display reload` (admin-only: reloads `config.yml`). |
+| Permission                          | Grants access to                                    |
+| ------------------------------------ | ---------------------------------------------------- |
+| `displaychanger.default`            | The `/display` command and all of its subcommands, including the GUI. |
+| `displaychanger.composition.save`   | `/display composition save` and `/display composition delete`. |
+| `displaychanger.composition.load`   | `/display composition load` and `/display composition list`. |
+| `displaychanger.selection.register` | `/display selection register` and `/display selection unregister`. |
+| `displaychanger.selection.move`     | `/display selection move`. |
+| `displaychanger.selection.rotate`   | `/display selection rotate`. |
+| `displaychanger.reload`             | `/display reload` (admin-only: reloads `config.yml`). |
 
 ## Region protection (WorldGuard)
 
@@ -341,9 +382,13 @@ Download it and add it as a resource pack on your client (or have your server pu
 | *Display is too far away*                 | Move closer to the display you're editing.                            |
 | *Invalid material*                        | The item/material you tried to spawn with isn't valid, or is on the server's hidden-items list. |
 | *This command can only be applied to text displays* | You ran a `text`/`glow` command while a non-matching display type was selected. |
-| *No WorldEdit selection found*            | Run `//pos1` and `//pos2` before saving a composition.                |
+| *No WorldEdit selection found*            | Run `//pos1` and `//pos2` before saving a composition or registering a selection group. |
 | *This feature requires WorldEdit*         | WorldEdit isn't installed on this server.                             |
 | *Invalid composition name*                | Only lowercase letters, numbers, `-` and `_` are allowed (max 32 characters). |
+| *No selection group registered*           | Run `/display selection register` before `move`/`unregister`.        |
+| *Too many displays in the selection*      | Narrow your WorldEdit selection — it exceeds the server's configured limit. |
+| *The move distance exceeds the configured limit* | Split the move into smaller steps, or ask an admin to raise `selection_move_radius`. |
+| *Cannot spawn ... as a ... display*       | The material you spawned doesn't support the `item`/`block` type you forced. |
 
 **Why can't I build here?** — Check your WorldGuard region rights, or ask an OP.
 

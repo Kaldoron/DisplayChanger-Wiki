@@ -5,6 +5,35 @@
 Nutzerseitige Änderungen an DisplayChanger, neueste zuerst. Das Plugin nutzt keine
 Versionsnummern für Releases, daher sind die Einträge nach Datum gruppiert.
 
+## 2026-08-31
+
+**Eine Gruppe von Displays gemeinsam bewegen und rotieren**
+Neue `/display selection`-Befehle behandeln jedes Display innerhalb einer WorldEdit-Selektion als
+eine feste Gruppe:
+
+- `/display selection register` – registriert jedes Display innerhalb deiner aktuellen
+  WorldEdit-Selektion (`//pos1`/`//pos2`) als Gruppe und speichert die Mitte der Selektion als
+  festen Pivotpunkt.
+- `/display selection move <dx> <dy> <dz>` – bewegt die gesamte Gruppe um einen relativen Versatz.
+- `/display selection rotate <yaw|pitch|roll|all> <degrees>` – rotiert die gesamte Gruppe
+  gemeinsam um ihren Pivotpunkt.
+- `/display selection unregister` – hebt die Gruppenregistrierung auf.
+
+`/display undo` macht jetzt zusätzlich zu Einzeländerungen auch die letzte Gruppen-Bewegung/
+-Rotation rückgängig – je nachdem, was zuletzt passiert ist. Siehe [Eine Gruppe von Displays
+bewegen und rotieren](Readme.de.md#eine-gruppe-von-displays-bewegen-und-rotieren).
+
+**Item- oder Block-Display beim Spawnen erzwingen**
+`/display spawn <feet|front|head> <material> <item|block>` erlaubt es, ein Material, das beides
+unterstützt – etwa einen Block –, statt des üblichen Block-Displays als Item-Display (dessen
+flaches Icon) zu spawnen, oder umgekehrt. Siehe [Displays spawnen](Readme.de.md#displays-spawnen).
+
+**Behoben**
+- `/display duplicate` hat bisher deine gesamte Liste registrierter Displays durch nur die neue
+  Kopie ersetzt, sodass du zu vorher registrierten Displays nur durch erneutes Registrieren
+  zurückwechseln konntest. Die Kopie wird jetzt stattdessen an diese Liste angehängt, der Rest
+  deiner registrierten Displays bleibt erhalten.
+
 ## 2026-08-24 – 2026-08-26
 
 **Transparenz bei der Hintergrundfarbe**
