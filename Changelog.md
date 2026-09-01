@@ -5,6 +5,21 @@
 User-facing changes to DisplayChanger, newest first. The plugin doesn't use version numbers for
 releases, so entries are grouped by date instead.
 
+## 2026-09-01
+
+**Fixed**
+- `/display selection rotate` could tear multi-piece constructions apart instead of rotating them
+  as one rigid group: displays whose position within the build comes from a fine offset (not just
+  their base position) ended up piled on top of each other with mismatched facings instead of
+  turning together. Rotating a selection now keeps every piece's position and orientation
+  correctly locked together. See [Moving and rotating a group of
+  displays](Readme.md#moving-and-rotating-a-group-of-displays).
+- `/display rotation add` (including its `<x> <y> <z>` form) could drift off the axis you asked
+  for once a display already had more than one rotation applied — e.g. adding yaw after a pitch
+  would tilt around the display's own already-tilted axis instead of the world's vertical axis.
+  Repeated rotations across different axes now behave consistently. See
+  [Transform: move, scale, rotate](Readme.md#transform-move-scale-rotate).
+
 ## 2026-08-31
 
 **Move and rotate a group of displays together**

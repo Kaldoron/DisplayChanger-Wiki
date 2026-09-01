@@ -5,6 +5,22 @@
 Nutzerseitige Änderungen an DisplayChanger, neueste zuerst. Das Plugin nutzt keine
 Versionsnummern für Releases, daher sind die Einträge nach Datum gruppiert.
 
+## 2026-09-01
+
+**Behoben**
+- `/display selection rotate` konnte mehrteilige Konstruktionen zerlegen, statt sie als eine feste
+  Gruppe zu rotieren: Displays, deren Position innerhalb des Baus über einen Feinversatz definiert
+  ist (nicht nur über ihre Basisposition), landeten übereinandergestapelt mit uneinheitlicher
+  Ausrichtung, statt sich gemeinsam zu drehen. Beim Rotieren einer Selektion bleiben Position und
+  Ausrichtung jedes Teils jetzt korrekt aneinander gekoppelt. Siehe [Eine Gruppe von Displays
+  bewegen und rotieren](Readme.de.md#eine-gruppe-von-displays-bewegen-und-rotieren).
+- `/display rotation add` (auch in der `<x> <y> <z>`-Form) konnte von der gewünschten Achse
+  abweichen, sobald ein Display bereits mehr als eine Rotation erhalten hatte – z. B. drehte ein
+  Yaw nach einem vorherigen Pitch um die bereits gekippte eigene Achse des Displays statt um die
+  senkrechte Weltachse. Aufeinanderfolgende Rotationen über verschiedene Achsen verhalten sich
+  jetzt konsistent. Siehe [Transformation: Bewegen, Skalieren,
+  Rotieren](Readme.de.md#transformation-bewegen-skalieren-rotieren).
+
 ## 2026-08-31
 
 **Eine Gruppe von Displays gemeinsam bewegen und rotieren**
