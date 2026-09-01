@@ -308,6 +308,9 @@ Notes:
 - Saving requires build rights in the selected area (see
   [Region protection](#region-protection-worldguard)) and requires WorldEdit to be installed;
   loading, listing, and deleting a composition do not require WorldEdit.
+- Don't have WorldEdit's own selection permission? Use `/display selection pos1` and
+  `/display selection pos2` instead of `//pos1`/`//pos2` — they set the same selection from your
+  current position, gated only by `displaychanger.selection.pos`.
 
 ## Moving and rotating a group of displays
 
@@ -339,6 +342,9 @@ Notes:
 - Registering a group requires build rights across the whole selected area; moving requires build
   rights at both the current and destination positions, and rotating requires build rights across
   the area the group sweeps through (see [Region protection](#region-protection-worldguard)).
+- Don't have WorldEdit's own selection permission? Use `/display selection pos1` and
+  `/display selection pos2` instead of `//pos1`/`//pos2` — they set the same selection from your
+  current position, gated only by `displaychanger.selection.pos`.
 
 ## Permissions
 
@@ -352,6 +358,7 @@ Ask your server admin for these if a command doesn't work for you:
 | `displaychanger.selection.register` | `/display selection register` and `/display selection unregister`. |
 | `displaychanger.selection.move`     | `/display selection move`. |
 | `displaychanger.selection.rotate`   | `/display selection rotate`. |
+| `displaychanger.selection.pos`      | `/display selection pos1` and `/display selection pos2` — sets a WorldEdit selection point without needing WorldEdit's own permission. |
 | `displaychanger.reload`             | `/display reload` (admin-only: reloads `config.yml`). |
 
 ## Region protection (WorldGuard)
@@ -382,7 +389,7 @@ Download it and add it as a resource pack on your client (or have your server pu
 | *Display is too far away*                 | Move closer to the display you're editing.                            |
 | *Invalid material*                        | The item/material you tried to spawn with isn't valid, or is on the server's hidden-items list. |
 | *This command can only be applied to text displays* | You ran a `text`/`glow` command while a non-matching display type was selected. |
-| *No WorldEdit selection found*            | Run `//pos1` and `//pos2` before saving a composition or registering a selection group. |
+| *No WorldEdit selection found*            | Run `//pos1` and `//pos2` (or `/display selection pos1`/`pos2` if you don't have WorldEdit's own permission) before saving a composition or registering a selection group. |
 | *This feature requires WorldEdit*         | WorldEdit isn't installed on this server.                             |
 | *Invalid composition name*                | Only lowercase letters, numbers, `-` and `_` are allowed (max 32 characters). |
 | *No selection group registered*           | Run `/display selection register` before `move`/`unregister`.        |

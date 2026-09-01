@@ -326,6 +326,9 @@ Hinweise:
 - Zum Speichern brauchst du Baurechte im ausgewählten Bereich (siehe
   [Regionsschutz](#regionsschutz-worldguard)) und ein installiertes WorldEdit; Laden, Auflisten und
   Löschen einer Composition benötigen kein WorldEdit.
+- Hast du WorldEdits eigenes Selektionsrecht nicht? Nutze `/display selection pos1` und
+  `/display selection pos2` statt `//pos1`/`//pos2` – sie setzen dieselbe Selektion von deiner
+  aktuellen Position aus, gesteuert nur über `displaychanger.selection.pos`.
 
 ## Eine Gruppe von Displays bewegen und rotieren
 
@@ -360,6 +363,9 @@ Hinweise:
   Bewegen brauchst du Baurechte sowohl an der aktuellen als auch an der Zielposition, und zum
   Rotieren Baurechte über den Bereich, den die Gruppe dabei überstreicht (siehe
   [Regionsschutz](#regionsschutz-worldguard)).
+- Hast du WorldEdits eigenes Selektionsrecht nicht? Nutze `/display selection pos1` und
+  `/display selection pos2` statt `//pos1`/`//pos2` – sie setzen dieselbe Selektion von deiner
+  aktuellen Position aus, gesteuert nur über `displaychanger.selection.pos`.
 
 ## Berechtigungen
 
@@ -373,6 +379,7 @@ Frag deinen Server-Admin danach, wenn ein Befehl bei dir nicht funktioniert:
 | `displaychanger.selection.register`  | `/display selection register` und `/display selection unregister`. |
 | `displaychanger.selection.move`      | `/display selection move`. |
 | `displaychanger.selection.rotate`    | `/display selection rotate`. |
+| `displaychanger.selection.pos`       | `/display selection pos1` und `/display selection pos2` – setzt einen WorldEdit-Selektionspunkt ohne WorldEdits eigenes Recht. |
 | `displaychanger.reload`              | `/display reload` (nur Admin: lädt `config.yml` neu). |
 
 ## Regionsschutz (WorldGuard)
@@ -404,7 +411,7 @@ Server zuschicken), um es zu nutzen.
 | *Display is too far away*                           | Geh näher an das Display heran, das du bearbeitest.                   |
 | *Invalid material*                                  | Das Item/Material, mit dem du spawnen wolltest, ist ungültig oder steht auf der Sperrliste des Servers. |
 | *This command can only be applied to text displays* | Du hast einen `text`/`glow`-Befehl bei einem nicht passenden Display-Typ ausgeführt. |
-| *No WorldEdit selection found*                      | Führe `//pos1` und `//pos2` aus, bevor du eine Composition speicherst oder eine Selection-Gruppe registrierst. |
+| *No WorldEdit selection found*                      | Führe `//pos1` und `//pos2` aus (oder `/display selection pos1`/`pos2`, falls du WorldEdits eigenes Recht nicht hast), bevor du eine Composition speicherst oder eine Selection-Gruppe registrierst. |
 | *This feature requires WorldEdit*                   | WorldEdit ist auf diesem Server nicht installiert.                    |
 | *Invalid composition name*                          | Nur Kleinbuchstaben, Zahlen, `-` und `_` sind erlaubt (max. 32 Zeichen). |
 | *No selection group registered*                     | Führe `/display selection register` vor `move`/`unregister` aus.      |

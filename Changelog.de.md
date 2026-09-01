@@ -7,6 +7,16 @@ Versionsnummern für Releases, daher sind die Einträge nach Datum gruppiert.
 
 ## 2026-09-01
 
+**Selektieren ohne WorldEdit-Berechtigung**
+Die neuen Befehle `/display selection pos1` und `/display selection pos2` setzen einen
+WorldEdit-Selektionspunkt auf den Block, auf dem du gerade stehst – dieselbe Selektion, die auch
+`//pos1`/`//pos2` setzen würde, aber gesteuert nur über DisplayChangers eigenes Recht
+`displaychanger.selection.pos` statt über WorldEdits eigenes. Nützlich für Spieler, die
+Compositions speichern oder eine Selection-Gruppe registrieren können sollen, ohne WorldEdits
+eigene Baurechte zu bekommen. Siehe [Compositions (Layouts
+speichern)](Readme.de.md#compositions-layouts-speichern) und [Eine Gruppe von Displays bewegen und
+rotieren](Readme.de.md#eine-gruppe-von-displays-bewegen-und-rotieren).
+
 **Behoben**
 - `/display selection rotate` konnte mehrteilige Konstruktionen zerlegen, statt sie als eine feste
   Gruppe zu rotieren: Displays, deren Position innerhalb des Baus über einen Feinversatz definiert

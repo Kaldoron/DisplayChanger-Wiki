@@ -7,6 +7,15 @@ releases, so entries are grouped by date instead.
 
 ## 2026-09-01
 
+**Select without a WorldEdit permission**
+New `/display selection pos1` and `/display selection pos2` commands set a WorldEdit selection
+point to the block you're currently standing on — the same selection `//pos1`/`//pos2` would set,
+but gated only by DisplayChanger's own `displaychanger.selection.pos` permission instead of
+WorldEdit's. Useful for players who should be able to save compositions or register a selection
+group without being granted WorldEdit's own building permissions. See [Compositions (saving
+layouts)](Readme.md#compositions-saving-layouts) and [Moving and rotating a group of
+displays](Readme.md#moving-and-rotating-a-group-of-displays).
+
 **Fixed**
 - `/display selection rotate` could tear multi-piece constructions apart instead of rotating them
   as one rigid group: displays whose position within the build comes from a fine offset (not just
