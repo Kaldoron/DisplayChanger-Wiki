@@ -147,6 +147,14 @@ einem einzigen Aufruf bewegen.
 
 ![Display - Movement menu](gui-screenshots/display-movement.png)
 
+**Zentrieren**
+
+`/display center` setzt die Position des Displays auf die Ecke der Blockzelle, in der es sich
+gerade befindet, und passt die Translation an die aktuelle Skalierung an, sodass es mittig in
+dieser Zelle sitzt – praktisch, wenn ein Display nach dem Verschieben wieder exakt am Block-Raster
+ausgerichtet werden soll, statt auf einer beliebigen fraktionalen Position zu stehen. Funktioniert
+bei Block-, Item- und TextDisplays; nur per Befehl, kein GUI-Äquivalent.
+
 **Skalierung**
 
 `/display scale <set|add> <x|y|z|all> <value>` setzt die Skalierung auf der angegebenen Achse

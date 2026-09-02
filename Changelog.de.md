@@ -5,6 +5,15 @@
 Nutzerseitige Änderungen an DisplayChanger, neueste zuerst. Das Plugin nutzt keine
 Versionsnummern für Releases, daher sind die Einträge nach Datum gruppiert.
 
+## 2026-09-02
+
+**Display am Block-Raster zentrieren**
+Der neue Befehl `/display center` setzt die Position des ausgewählten Displays auf die Ecke der
+Blockzelle, in der es sich gerade befindet, und passt die Translation an die aktuelle Skalierung
+an, sodass es mittig in dieser Zelle sitzt. Praktisch für präzise Positionierung, nachdem ein
+Display verschoben wurde – funktioniert bei Block-, Item- und TextDisplays. Siehe
+[Transformation: Bewegen, Skalieren, Rotieren](Readme.de.md#transformation-bewegen-skalieren-rotieren).
+
 ## 2026-09-01
 
 **Selektieren ohne WorldEdit-Berechtigung**

@@ -5,6 +5,14 @@
 User-facing changes to DisplayChanger, newest first. The plugin doesn't use version numbers for
 releases, so entries are grouped by date instead.
 
+## 2026-09-02
+
+**Center a display on the block grid**
+New `/display center` command snaps the selected display's position to the corner of the block
+cell it currently occupies, and adjusts its translation to match the current scale, so it sits
+centered in that cell. Handy for precise positioning after nudging a display around — works on
+Block, Item and Text displays. See [Transform: move, scale, rotate](Readme.md#transform-move-scale-rotate).
+
 ## 2026-09-01
 
 **Select without a WorldEdit permission**

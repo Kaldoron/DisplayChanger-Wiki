@@ -139,6 +139,14 @@ instead of a relative nudge, and can move all three axes in a single call.
 
 ![Display - Movement menu](gui-screenshots/display-movement.png)
 
+**Center**
+
+`/display center` snaps the display's position to the corner of the block cell it currently
+occupies, and adjusts its translation to match the current scale, so it sits centered in that
+cell — handy after nudging a display around and wanting it to line up with the block grid again
+instead of sitting at an arbitrary fractional position. Works on Block, Item and Text displays;
+command-only, no GUI equivalent.
+
 **Scale**
 
 `/display scale <set|add> <x|y|z|all> <value>` sets or adds to the scale on the given axis (or
