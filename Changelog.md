@@ -5,6 +5,26 @@
 User-facing changes to DisplayChanger, newest first. The plugin doesn't use version numbers for
 releases, so entries are grouped by date instead.
 
+## 2026-09-04
+
+**Repair display groups affected by a leaked camera angle**
+New `/display selection fix` command. Some displays built before this fix could end up with the
+direction you were looking in at the moment you spawned them silently baked into their position
+data — the piece still looked correct as long as it stayed exactly where it was built, but saving
+it into a composition and loading it back could suddenly show it facing the wrong way. Register the
+affected group with `/display selection register`, then run `/display selection fix` — it detects
+and repairs every display in the group without changing how it currently looks, so you don't have
+to rebuild anything. See [Moving and rotating a group of
+displays](Readme.md#moving-and-rotating-a-group-of-displays).
+
+**Fixed**
+- Spawning a display while holding a generic item (anything other than a player head or a name
+  tag) in your main hand could silently bake the direction you were looking in at that moment into
+  the display, with no visible effect until the display was later saved into a composition and
+  loaded again — at which point it could come out facing differently than it did before. Newly
+  spawned displays are no longer affected; see `/display selection fix` above to repair existing
+  ones.
+
 ## 2026-09-02
 
 **Center a display on the block grid**

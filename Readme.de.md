@@ -354,6 +354,13 @@ GUI-Menü – alles unten ist nur per Befehl verfügbar.
 4. **`/display selection rotate <yaw|pitch|roll|all> <degrees>`** – rotiert jedes Display der
    Gruppe gemeinsam um den bei der Registrierung gespeicherten Pivotpunkt; der Pivot bewegt sich
    mit der Gruppe mit.
+5. **`/display selection fix`** – repariert Displays, die vor dem 2026-09-04-Fix gebaut wurden und
+   dabei unsichtbar die Blickrichtung im Spawn-Moment in ihre Positionsdaten übernommen haben. Ein
+   solches Display sah weiterhin korrekt aus, solange es genau an seinem Bauort stehen blieb, aber
+   sobald es in eine Composition gespeichert und wieder geladen wurde, konnte es plötzlich in eine
+   falsche Richtung zeigen. `fix` erkennt und repariert jedes betroffene Display der Gruppe, ohne
+   die aktuelle Optik zu verändern – nach dem Fix gespawnte Displays sind nie betroffen, du
+   brauchst das also nur für ältere Bauten.
 
 Weitere Selection-Befehle:
 
@@ -386,7 +393,7 @@ Frag deinen Server-Admin danach, wenn ein Befehl bei dir nicht funktioniert:
 | `displaychanger.composition.load`    | `/display composition load` und `/display composition list`. |
 | `displaychanger.selection.register`  | `/display selection register` und `/display selection unregister`. |
 | `displaychanger.selection.move`      | `/display selection move`. |
-| `displaychanger.selection.rotate`    | `/display selection rotate`. |
+| `displaychanger.selection.rotate`    | `/display selection rotate` und `/display selection fix`. |
 | `displaychanger.selection.pos`       | `/display selection pos1` und `/display selection pos2` – setzt einen WorldEdit-Selektionspunkt ohne WorldEdits eigenes Recht. |
 | `displaychanger.reload`              | `/display reload` (nur Admin: lädt `config.yml` neu). |
 

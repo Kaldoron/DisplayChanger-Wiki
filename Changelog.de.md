@@ -5,6 +5,26 @@
 Nutzerseitige Änderungen an DisplayChanger, neueste zuerst. Das Plugin nutzt keine
 Versionsnummern für Releases, daher sind die Einträge nach Datum gruppiert.
 
+## 2026-09-04
+
+**Display-Gruppen mit ausgelaufenem Blickwinkel reparieren**
+Neuer Befehl `/display selection fix`. Manche vor diesem Fix gebauten Displays konnten die
+Blickrichtung, in die du im Moment des Spawnens geschaut hast, unsichtbar in ihre Positionsdaten
+übernommen haben – solange das Teil genau an seinem Bauort stehen blieb, sah es weiterhin korrekt
+aus, aber sobald es in eine Composition gespeichert und wieder geladen wurde, konnte es plötzlich in
+eine falsche Richtung zeigen. Registriere die betroffene Gruppe mit `/display selection register`
+und führe dann `/display selection fix` aus – erkennt und repariert jedes Display der Gruppe, ohne
+die aktuelle Optik zu verändern, du musst also nichts neu bauen. Siehe [Eine Gruppe von Displays
+bewegen und rotieren](Readme.de.md#eine-gruppe-von-displays-bewegen-und-rotieren).
+
+**Behoben**
+- Beim Spawnen eines Displays mit einem generischen Item (alles außer Spielerkopf oder
+  Namensschild) in der Haupthand konnte die Blickrichtung im Spawn-Moment unsichtbar in das Display
+  übernommen werden – ohne sichtbare Auswirkung, bis das Display später in eine Composition
+  gespeichert und wieder geladen wurde, wo es dann anders ausgerichtet sein konnte als vorher. Neu
+  gespawnte Displays sind davon nicht mehr betroffen; siehe oben `/display selection fix`, um
+  bestehende zu reparieren.
+
 ## 2026-09-02
 
 **Display am Block-Raster zentrieren**

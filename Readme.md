@@ -335,6 +335,12 @@ below is command-only.
    offset (relative, in blocks).
 4. **`/display selection rotate <yaw|pitch|roll|all> <degrees>`** — rotates every display in the
    group together around the pivot captured at registration; the pivot moves with the group.
+5. **`/display selection fix`** — repairs displays built before 2026-09-04 that silently baked the
+   direction you were looking in at spawn time into their position data. Such a display could still
+   look correct as long as it stayed exactly where it was built, but saving it into a composition
+   and loading it back could suddenly show it facing the wrong way. `fix` detects and repairs every
+   affected display in the group without changing how it currently looks — displays spawned after
+   the fix are never affected, so you only need this for older builds.
 
 Other selection commands:
 
@@ -365,7 +371,7 @@ Ask your server admin for these if a command doesn't work for you:
 | `displaychanger.composition.load`   | `/display composition load` and `/display composition list`. |
 | `displaychanger.selection.register` | `/display selection register` and `/display selection unregister`. |
 | `displaychanger.selection.move`     | `/display selection move`. |
-| `displaychanger.selection.rotate`   | `/display selection rotate`. |
+| `displaychanger.selection.rotate`   | `/display selection rotate` and `/display selection fix`. |
 | `displaychanger.selection.pos`      | `/display selection pos1` and `/display selection pos2` — sets a WorldEdit selection point without needing WorldEdit's own permission. |
 | `displaychanger.reload`             | `/display reload` (admin-only: reloads `config.yml`). |
 
