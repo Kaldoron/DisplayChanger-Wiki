@@ -22,7 +22,7 @@ Nutze **/display** für jeden Befehl unten.
 - [Darstellung: Ausrichtung, Sichtweite, Schatten, Helligkeit](#darstellung-ausrichtung-sichtweite-schatten-helligkeit)
 - [Leuchten (Glow)](#leuchten-glow)
 - [Text-Displays](#text-displays)
-- [MiniMessage-Formatierung](#minimessage-formatierung)
+- [Textfarben und Formatierung](#textfarben-und-formatierung)
 - [Compositions (Layouts speichern)](#compositions-layouts-speichern)
 - [Eine Gruppe von Displays bewegen und rotieren](#eine-gruppe-von-displays-bewegen-und-rotieren)
 - [Berechtigungen](#berechtigungen)
@@ -261,7 +261,7 @@ spawnen](#displays-spawnen) – halte ein Namensschild in der Hand, um eines zu 
   ersetzen.
 
   Beide Befehle verstehen [MiniMessage](https://docs.advntr.dev/minimessage/format.html)-
-  Formatierung (alle Tags: [MiniMessage-Formatierung](#minimessage-formatierung)), du kannst also z. B. schreiben:
+  Formatierung (alle Tags: [Textfarben und Formatierung](#textfarben-und-formatierung)), du kannst also z. B. schreiben:
 
   ```
   /display text settext <gold><bold>Willkommen!
@@ -307,11 +307,11 @@ Reset – eigene RGB-/HEX-Farben und Alpha gibt es nur per Befehl.
 
 ![Display - Backgroundcolor menu](gui-screenshots/display-text-backgroundcolors.png)
 
-## MiniMessage-Formatierung
+## Textfarben und Formatierung
 
-Text-Displays zeigen ihren Text mit [MiniMessage](https://docs.advntr.dev/minimessage/format.html)
-an, der Formatierungssprache der Adventure-Bibliothek. Formatierung wird als Tags in spitzen
-Klammern geschrieben, z. B. `<red>` oder `<bold>`. Ein Farb- oder Stil-Tag gilt für allen Text
+Farben und Stile eines Text-Displays werden mit Tags in spitzen Klammern festgelegt, z. B. `<red>`
+oder `<bold>`. Die Tags folgen dem Format [MiniMessage](https://docs.advntr.dev/minimessage/format.html)
+der Adventure-Bibliothek. Ein Farb- oder Stil-Tag gilt für allen Text
 danach, bis ein passender schließender Tag (`</red>`, `</bold>`) oder das Textende kommt.
 
 **So wird der Text eingegeben**

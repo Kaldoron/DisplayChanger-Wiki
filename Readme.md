@@ -22,7 +22,7 @@ Use **/display** for every command below.
 - [Appearance: billboard, view range, shadow, brightness](#appearance-billboard-view-range-shadow-brightness)
 - [Glow](#glow)
 - [Text displays](#text-displays)
-- [MiniMessage formatting](#minimessage-formatting)
+- [Text colors and formatting](#text-colors-and-formatting)
 - [Compositions (saving layouts)](#compositions-saving-layouts)
 - [Moving and rotating a group of displays](#moving-and-rotating-a-group-of-displays)
 - [Permissions](#permissions)
@@ -247,7 +247,7 @@ displays](#spawning-displays) — hold a Name Tag to spawn one).
 - **`/display text addtext <text>`** — appends text to the existing text instead of replacing it.
 
   Both commands understand [MiniMessage](https://docs.advntr.dev/minimessage/format.html)
-  formatting (full tag list: [MiniMessage formatting](#minimessage-formatting)), so you can write things like:
+  formatting (full tag list: [Text colors and formatting](#text-colors-and-formatting)), so you can write things like:
 
   ```
   /display text settext <gold><bold>Welcome!
@@ -291,11 +291,11 @@ custom RGB/HEX and alpha are command-only.
 
 ![Display - Backgroundcolor menu](gui-screenshots/display-text-backgroundcolors.png)
 
-## MiniMessage formatting
+## Text colors and formatting
 
-Text Displays render their text with [MiniMessage](https://docs.advntr.dev/minimessage/format.html),
-the formatting language of the Adventure library. Formatting is written as tags in angle brackets,
-such as `<red>` or `<bold>`. A color or style tag applies to all text after it, until a matching
+The colors and styles of a Text Display are set with tags in angle brackets, such as `<red>` or
+`<bold>`. The tags follow the [MiniMessage](https://docs.advntr.dev/minimessage/format.html) format
+of the Adventure library. A color or style tag applies to all text after it, until a matching
 closing tag (`</red>`, `</bold>`) or the end of the text.
 
 **How the text is entered**
