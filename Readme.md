@@ -22,6 +22,7 @@ Use **/display** for every command below.
 - [Appearance: billboard, view range, shadow, brightness](#appearance-billboard-view-range-shadow-brightness)
 - [Glow](#glow)
 - [Text displays](#text-displays)
+- [MiniMessage formatting](#minimessage-formatting)
 - [Compositions (saving layouts)](#compositions-saving-layouts)
 - [Moving and rotating a group of displays](#moving-and-rotating-a-group-of-displays)
 - [Permissions](#permissions)
@@ -246,7 +247,7 @@ displays](#spawning-displays) — hold a Name Tag to spawn one).
 - **`/display text addtext <text>`** — appends text to the existing text instead of replacing it.
 
   Both commands understand [MiniMessage](https://docs.advntr.dev/minimessage/format.html)
-  formatting, so you can write things like:
+  formatting (full tag list: [MiniMessage formatting](#minimessage-formatting)), so you can write things like:
 
   ```
   /display text settext <gold><bold>Welcome!
@@ -289,6 +290,84 @@ invisible. To hide the background entirely, set alpha to `0` instead, e.g.
 custom RGB/HEX and alpha are command-only.
 
 ![Display - Backgroundcolor menu](gui-screenshots/display-text-backgroundcolors.png)
+
+## MiniMessage formatting
+
+Text Displays render their text with [MiniMessage](https://docs.advntr.dev/minimessage/format.html),
+the formatting language of the Adventure library. Formatting is written as tags in angle brackets,
+such as `<red>` or `<bold>`. A color or style tag applies to all text after it, until a matching
+closing tag (`</red>`, `</bold>`) or the end of the text.
+
+**How the text is entered**
+
+- Everything after the subcommand is taken as the text, so no quotes are needed. Multiple spaces
+  are collapsed into one.
+- A command cannot contain a line break: use `<newline>` (or `<br>`) to start a new line.
+- Legacy codes such as `&c` or `§c` are **not** converted. They show up as plain text, so use the
+  tags below instead.
+- To show a literal `<`, escape it with a backslash: `\<3`.
+
+**Colors**
+
+| Tag | Color |
+|---|---|
+| `<black>` | black |
+| `<dark_blue>` | dark blue |
+| `<dark_green>` | dark green |
+| `<dark_aqua>` | dark aqua |
+| `<dark_red>` | dark red |
+| `<dark_purple>` | dark purple |
+| `<gold>` | gold |
+| `<gray>` (alias `<grey>`) | gray |
+| `<dark_gray>` (alias `<dark_grey>`) | dark gray |
+| `<blue>` | blue |
+| `<green>` | green |
+| `<aqua>` | aqua |
+| `<red>` | red |
+| `<light_purple>` | light purple |
+| `<yellow>` | yellow |
+| `<white>` | white |
+
+Custom colors work too: `<#RRGGBB>` (e.g. `<#ff8800>`), or `<color:#RRGGBB>` / `<color:gold>` with
+the explicit `color:` prefix.
+
+**Styles**
+
+| Tag | Effect |
+|---|---|
+| `<bold>` / `<b>` | bold |
+| `<italic>` / `<i>` / `<em>` / `<emphasis>` | italic |
+| `<underlined>` / `<u>` | underlined |
+| `<strikethrough>` / `<st>` | strikethrough |
+| `<obfuscated>` / `<obf>` | obfuscated (random characters) |
+
+Close a style with its closing tag, e.g. `</bold>`. `<!bold>` turns off a style inherited from an
+outer tag, and `<reset>` removes all colors and styles set before it.
+
+**Gradients and rainbow**
+
+| Tag | Effect |
+|---|---|
+| `<gradient:red:blue>…</gradient>` | fades from the first to the last color; add more colors as extra arguments, e.g. `<gradient:#ff0000:#00ff00:#0000ff>` |
+| `<rainbow>…</rainbow>` | rainbow colors; `<rainbow:2>` shifts the starting hue |
+
+**Layout and fonts**
+
+| Tag | Effect |
+|---|---|
+| `<newline>` / `<br>` | line break |
+| `<font:namespace:key>` | uses a font by key, e.g. `<font:minecraft:uniform>`; custom fonts must be provided by a resource pack |
+
+**Not useful on displays:** the interactive tags `<click:…>`, `<hover:…>` and `<insertion:…>` have no
+effect, because a display can't be clicked or hovered.
+
+**Example**
+
+```
+/display text settext <gradient:#ffaa00:#ff5555><bold>Welcome!</bold></gradient>
+/display text addtext <newline><gray>to the server <#55ff55>[online]
+/display text settext <rainbow>Party time!</rainbow>
+```
 
 ## Compositions (saving layouts)
 

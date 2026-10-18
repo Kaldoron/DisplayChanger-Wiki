@@ -22,6 +22,7 @@ Nutze **/display** für jeden Befehl unten.
 - [Darstellung: Ausrichtung, Sichtweite, Schatten, Helligkeit](#darstellung-ausrichtung-sichtweite-schatten-helligkeit)
 - [Leuchten (Glow)](#leuchten-glow)
 - [Text-Displays](#text-displays)
+- [MiniMessage-Formatierung](#minimessage-formatierung)
 - [Compositions (Layouts speichern)](#compositions-layouts-speichern)
 - [Eine Gruppe von Displays bewegen und rotieren](#eine-gruppe-von-displays-bewegen-und-rotieren)
 - [Berechtigungen](#berechtigungen)
@@ -260,7 +261,7 @@ spawnen](#displays-spawnen) – halte ein Namensschild in der Hand, um eines zu 
   ersetzen.
 
   Beide Befehle verstehen [MiniMessage](https://docs.advntr.dev/minimessage/format.html)-
-  Formatierung, du kannst also z. B. schreiben:
+  Formatierung (alle Tags: [MiniMessage-Formatierung](#minimessage-formatierung)), du kannst also z. B. schreiben:
 
   ```
   /display text settext <gold><bold>Willkommen!
@@ -305,6 +306,86 @@ Alpha auf `0`, z. B. `/display text backgroundcolor black 0` oder
 Reset – eigene RGB-/HEX-Farben und Alpha gibt es nur per Befehl.
 
 ![Display - Backgroundcolor menu](gui-screenshots/display-text-backgroundcolors.png)
+
+## MiniMessage-Formatierung
+
+Text-Displays zeigen ihren Text mit [MiniMessage](https://docs.advntr.dev/minimessage/format.html)
+an, der Formatierungssprache der Adventure-Bibliothek. Formatierung wird als Tags in spitzen
+Klammern geschrieben, z. B. `<red>` oder `<bold>`. Ein Farb- oder Stil-Tag gilt für allen Text
+danach, bis ein passender schließender Tag (`</red>`, `</bold>`) oder das Textende kommt.
+
+**So wird der Text eingegeben**
+
+- Alles nach dem Subcommand gilt als Text, Anführungszeichen sind also nicht nötig. Mehrere
+  Leerzeichen werden zu einem zusammengefasst.
+- Ein Befehl kann keinen Zeilenumbruch enthalten: Nutze `<newline>` (oder `<br>`), um eine neue
+  Zeile zu beginnen.
+- Alte Farbcodes wie `&c` oder `§c` werden **nicht** umgewandelt – sie erscheinen als normaler
+  Text. Verwende stattdessen die Tags unten.
+- Um ein `<` wörtlich anzuzeigen, maskiere es mit einem Backslash: `\<3`.
+
+**Farben**
+
+| Tag | Farbe |
+|---|---|
+| `<black>` | Schwarz |
+| `<dark_blue>` | Dunkelblau |
+| `<dark_green>` | Dunkelgrün |
+| `<dark_aqua>` | Dunkelaqua |
+| `<dark_red>` | Dunkelrot |
+| `<dark_purple>` | Dunkelviolett |
+| `<gold>` | Gold |
+| `<gray>` (Alias `<grey>`) | Grau |
+| `<dark_gray>` (Alias `<dark_grey>`) | Dunkelgrau |
+| `<blue>` | Blau |
+| `<green>` | Grün |
+| `<aqua>` | Aqua |
+| `<red>` | Rot |
+| `<light_purple>` | Helles Violett |
+| `<yellow>` | Gelb |
+| `<white>` | Weiß |
+
+Eigene Farben funktionieren ebenfalls: `<#RRGGBB>` (z. B. `<#ff8800>`) oder `<color:#RRGGBB>` /
+`<color:gold>` mit dem expliziten Präfix `color:`.
+
+**Stile**
+
+| Tag | Wirkung |
+|---|---|
+| `<bold>` / `<b>` | fett |
+| `<italic>` / `<i>` / `<em>` / `<emphasis>` | kursiv |
+| `<underlined>` / `<u>` | unterstrichen |
+| `<strikethrough>` / `<st>` | durchgestrichen |
+| `<obfuscated>` / `<obf>` | verschleiert (zufällige Zeichen) |
+
+Einen Stil beendest du mit dem schließenden Tag, z. B. `</bold>`. `<!bold>` schaltet einen Stil
+aus, der von einem äußeren Tag geerbt wurde, und `<reset>` entfernt alle zuvor gesetzten Farben
+und Stile.
+
+**Verläufe und Regenbogen**
+
+| Tag | Wirkung |
+|---|---|
+| `<gradient:red:blue>…</gradient>` | Verlauf von der ersten zur letzten Farbe; weitere Farben als zusätzliche Argumente, z. B. `<gradient:#ff0000:#00ff00:#0000ff>` |
+| `<rainbow>…</rainbow>` | Regenbogenfarben; `<rainbow:2>` verschiebt den Startfarbton |
+
+**Layout und Schriften**
+
+| Tag | Wirkung |
+|---|---|
+| `<newline>` / `<br>` | Zeilenumbruch |
+| `<font:namespace:key>` | verwendet eine Schrift über ihren Schlüssel, z. B. `<font:minecraft:uniform>`; eigene Schriften müssen über ein Resource Pack bereitgestellt werden |
+
+**Auf Displays nicht sinnvoll:** Die interaktiven Tags `<click:…>`, `<hover:…>` und `<insertion:…>`
+haben keine Wirkung, weil ein Display nicht angeklickt oder überfahren werden kann.
+
+**Beispiel**
+
+```
+/display text settext <gradient:#ffaa00:#ff5555><bold>Willkommen!</bold></gradient>
+/display text addtext <newline><gray>auf dem Server <#55ff55>[online]
+/display text settext <rainbow>Partyzeit!</rainbow>
+```
 
 ## Compositions (Layouts speichern)
 
