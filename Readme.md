@@ -142,11 +142,11 @@ instead of a relative nudge, and can move all three axes in a single call.
 
 **Center**
 
-`/display center` snaps the display's position to the corner of the block cell it currently
-occupies, and adjusts its translation to match the current scale, so it sits centered in that
-cell — handy after nudging a display around and wanting it to line up with the block grid again
-instead of sitting at an arbitrary fractional position. Works on Block, Item and Text displays;
-command-only, no GUI equivalent.
+`/display center` moves the display to the center of the block cell it currently occupies and
+adjusts its translation so the middle of the model sits exactly on that point, in its current
+rotation and scale. Because the model is centered on the display's own position, it stays centered
+even with a billboard mode or when the display entity itself is rotated. Works on Block, Item and
+Text displays; command-only, no GUI equivalent.
 
 **Scale**
 
@@ -162,10 +162,17 @@ scale — jumping straight to an exact scale value (`set`) is command-only.
 
 **Rotation**
 
-`/display rotation <set|add> <pitch|roll|yaw|all> <value>` sets or adds to the rotation on the
+`/display rotation <set|add> <yaw|pitch|roll|all> <value>` sets or adds to the rotation on the
 given axis.
-`/display rotation <set|add> <x> <y> <z>` sets or adds to yaw, pitch and roll all at once.
-`/display rotation reset` resets the rotation back to the values the display was spawned with.
+`/display rotation <set|add> <yaw> <pitch> <roll>` sets or adds to all three at once.
+`/display rotation reset` sets all three angles back to 0.
+
+All three angles rotate around the fixed world axes: yaw around the vertical axis (`90` turns the
+front to the west, like the yaw shown in F3), pitch around the east-west axis (`90` tilts the front
+down), roll around the north-south axis. `add` only changes the given angle, so `add` and `set`
+always lead to the same result, in any order — `set 45 45 0`, `add yaw 45` followed by
+`add pitch 45`, and `add pitch 45` followed by `add yaw 45` all give the same display, and
+`/display info` shows `45 / 45 / 0` for each.
 
 *GUI:* the `display_rotation` menu tilts/turns the display in fixed steps of 1° or 10° per click
 (pitch, yaw and roll each have their own buttons), plus a reset button. As with scale, it only
@@ -414,6 +421,8 @@ below is command-only.
    offset (relative, in blocks).
 4. **`/display selection rotate <yaw|pitch|roll|all> <degrees>`** — rotates every display in the
    group together around the pivot captured at registration; the pivot moves with the group.
+   Displays with a billboard mode other than `fixed` keep facing the camera: only their position
+   turns with the group.
 5. **`/display selection fix`** — repairs displays built before 2026-09-04 that silently baked the
    direction you were looking in at spawn time into their position data. Such a display could still
    look correct as long as it stayed exactly where it was built, but saving it into a composition

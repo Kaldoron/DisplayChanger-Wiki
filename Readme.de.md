@@ -150,11 +150,11 @@ einem einzigen Aufruf bewegen.
 
 **Zentrieren**
 
-`/display center` setzt die Position des Displays auf die Ecke der Blockzelle, in der es sich
-gerade befindet, und passt die Translation an die aktuelle Skalierung an, sodass es mittig in
-dieser Zelle sitzt – praktisch, wenn ein Display nach dem Verschieben wieder exakt am Block-Raster
-ausgerichtet werden soll, statt auf einer beliebigen fraktionalen Position zu stehen. Funktioniert
-bei Block-, Item- und TextDisplays; nur per Befehl, kein GUI-Äquivalent.
+`/display center` setzt das Display in die Mitte der Blockzelle, in der es sich gerade befindet,
+und passt die Translation so an, dass die Mitte des Modells in seiner aktuellen Rotation und
+Skalierung genau auf diesem Punkt liegt. Weil das Modell um die Position des Displays zentriert
+ist, bleibt es auch mit einem Billboard-Modus oder bei gedrehter Display-Entity mittig.
+Funktioniert bei Block-, Item- und TextDisplays; nur per Befehl, kein GUI-Äquivalent.
 
 **Skalierung**
 
@@ -172,11 +172,17 @@ nur per Befehl.
 
 **Rotation**
 
-`/display rotation <set|add> <pitch|roll|yaw|all> <value>` setzt die Rotation auf der angegebenen
+`/display rotation <set|add> <yaw|pitch|roll|all> <value>` setzt die Rotation auf der angegebenen
 Achse oder addiert dazu.
-`/display rotation <set|add> <x> <y> <z>` setzt Yaw, Pitch und Roll auf einmal oder addiert dazu.
-`/display rotation reset` setzt die Rotation zurück auf die Werte, mit denen das Display gespawnt
-wurde.
+`/display rotation <set|add> <yaw> <pitch> <roll>` setzt alle drei auf einmal oder addiert dazu.
+`/display rotation reset` setzt alle drei Winkel auf 0 zurück.
+
+Alle drei Winkel drehen um die festen Weltachsen: Yaw um die Senkrechte (`90` dreht die Front nach
+Westen, wie der Yaw in F3), Pitch um die Ost-West-Achse (`90` kippt die Front nach unten), Roll um
+die Nord-Süd-Achse. `add` ändert nur den jeweiligen Winkel, deshalb führen `add` und `set` immer zum
+selben Ergebnis, egal in welcher Reihenfolge — `set 45 45 0`, `add yaw 45` und danach
+`add pitch 45` sowie `add pitch 45` und danach `add yaw 45` ergeben alle dasselbe Display, und
+`/display info` zeigt jeweils `45 / 45 / 0`.
 
 *GUI:* Das Menü `display_rotation` kippt/dreht das Display in festen Schritten von 1° oder 10° pro
 Klick (Pitch, Yaw und Roll haben jeweils eigene Buttons), plus ein Reset-Button. Wie bei der
@@ -434,7 +440,8 @@ GUI-Menü – alles unten ist nur per Befehl verfügbar.
    angegebenen Versatz (relativ, in Blöcken).
 4. **`/display selection rotate <yaw|pitch|roll|all> <degrees>`** – rotiert jedes Display der
    Gruppe gemeinsam um den bei der Registrierung gespeicherten Pivotpunkt; der Pivot bewegt sich
-   mit der Gruppe mit.
+   mit der Gruppe mit. Displays mit einem anderen Billboard-Modus als `fixed` richten sich weiter
+   zur Kamera aus: bei ihnen dreht nur die Position mit.
 5. **`/display selection fix`** – repariert Displays, die vor dem 2026-09-04-Fix gebaut wurden und
    dabei unsichtbar die Blickrichtung im Spawn-Moment in ihre Positionsdaten übernommen haben. Ein
    solches Display sah weiterhin korrekt aus, solange es genau an seinem Bauort stehen blieb, aber

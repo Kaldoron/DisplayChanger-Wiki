@@ -5,6 +5,29 @@
 Nutzerseitige Änderungen an DisplayChanger, neueste zuerst. Das Plugin nutzt keine
 Versionsnummern für Releases, daher sind die Einträge nach Datum gruppiert.
 
+## 2026-11-07
+
+**Rotation verhält sich mit `set` und `add` gleich**
+`/display rotation` dreht jetzt jede Achse um die festen Weltachsen: Yaw um die Senkrechte, Pitch
+um die Ost-West-Achse, Roll um die Nord-Süd-Achse. `add` ändert nur den jeweiligen Winkel, deshalb
+ergeben `set` und `add` immer dasselbe Display, egal in welcher Reihenfolge, und `/display info`
+zeigt genau die eingegebenen Winkel. Yaw dreht jetzt in dieselbe Richtung wie der Yaw in F3:
+`90` zeigt nach Westen.
+
+**Geändert**
+- `/display center` setzt das Display jetzt in die Mitte der Blockzelle statt an ihre Ecke, damit
+  es auch mit Billboard-Modus oder gedrehter Display-Entity mittig bleibt.
+- `/display rotation reset` setzt alle drei Winkel auf 0 zurück.
+
+**Behoben**
+- Wer ein Display schrittweise über 90° Pitch hinaus dreht (zum Beispiel im Rotationsmenü), sieht
+  es nicht mehr zurückspringen.
+- `/display selection rotate` behält die eigene Ausrichtung jedes Displays und dreht Displays mit
+  selbst gedrehter Entity wie erwartet um die Weltachsen.
+- Displays mit Culling-Größe (`width`/`height`) verschwinden nach dem Drehen, Skalieren oder
+  Zentrieren nicht mehr, obwohl sie im Bild sind.
+- Text-Displays werden einen halben Pixel genauer zentriert.
+
 ## 2026-09-04
 
 **Display-Gruppen mit ausgelaufenem Blickwinkel reparieren**

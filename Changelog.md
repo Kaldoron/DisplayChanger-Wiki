@@ -5,6 +5,29 @@
 User-facing changes to DisplayChanger, newest first. The plugin doesn't use version numbers for
 releases, so entries are grouped by date instead.
 
+## 2026-11-07
+
+**Rotation works the same with `set` and `add`**
+`/display rotation` now turns every axis around the fixed world axes: yaw around the vertical
+axis, pitch around the east-west axis, roll around the north-south axis. `add` only changes the
+given angle, so `set` and `add` always produce the same display, in any order, and
+`/display info` shows exactly the angles you entered. Yaw now turns the same way as the yaw
+shown in F3: `90` faces west.
+
+**Changed**
+- `/display center` now moves the display to the middle of the block cell instead of its corner,
+  so it stays centered with a billboard mode or a rotated display entity.
+- `/display rotation reset` sets all three angles back to 0.
+
+**Fixed**
+- Turning a display past 90° pitch in steps (for example with the rotation menu) no longer makes
+  it jump back.
+- `/display selection rotate` keeps each display's own facing, and rotates displays whose entity
+  is itself rotated around the world axes as expected.
+- Displays with a culling size (`width`/`height`) no longer vanish while still in view after being
+  rotated, scaled or centered.
+- Text displays are centered half a pixel more precisely.
+
 ## 2026-09-04
 
 **Repair display groups affected by a leaked camera angle**
